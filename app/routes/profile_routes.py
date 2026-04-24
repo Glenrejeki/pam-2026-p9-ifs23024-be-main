@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, send_file
+from flask import Blueprint, jsonify, send_file, request
 from flask_cors import cross_origin
 from app.services.profile_service import get_profile
 from app.utils.response import success, fail

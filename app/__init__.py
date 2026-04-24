@@ -18,13 +18,27 @@ def create_app():
 
     Base.metadata.create_all(bind=engine)
 
-    # Buat folder uploads jika belum ada
     for folder in ["uploads/plants", "uploads/space", "uploads/profile"]:
         os.makedirs(folder, exist_ok=True)
+
+    # Serve static files dari folder uploads
+    app.config["UPLOAD_FOLDER"] = "uploads"
 
     app.register_blueprint(space_object_bp)
     app.register_blueprint(plant_bp)
     app.register_blueprint(profile_bp)
     app.register_blueprint(ai_bp)
+
+    # Route index
+    @app.route("/")
+    def index():
+        return "API telah berjalan! Dibuat oleh Abdullah Ubaid"
+
+    # Serve static files
+    from flask import send_from_directory
+
+    @app.route("/static/<path:filename>")
+    def static_files(filename):
+        return send_from_directory("uploads", filename)
 
     return app
