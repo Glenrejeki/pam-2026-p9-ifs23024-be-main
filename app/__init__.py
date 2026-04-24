@@ -5,9 +5,13 @@ from app.routes.motivation_routes import motivation_bp
 
 def create_app():
     app = Flask(__name__)
-    
-    # enable cros
-    CORS(app)
+
+    # Fix CORS - izinkan semua origin, method, dan header
+    CORS(app,
+         origins="*",
+         allow_headers=["Content-Type", "Authorization"],
+         methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+         )
 
     # create tables
     Base.metadata.create_all(bind=engine)
