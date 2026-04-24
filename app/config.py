@@ -4,8 +4,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Config:
-    APP_PORT = os.getenv("APP_PORT")
-    BASE_URL = os.getenv("LLM_BASE_URL")
+    APP_PORT = os.getenv("APP_PORT", 5000)
+    BASE_URL = os.getenv("BASE_URL", "http://localhost:5000")
+    LLM_BASE_URL = os.getenv("LLM_BASE_URL")
     LLM_TOKEN = os.getenv("LLM_TOKEN")
-    SQLALCHEMY_DATABASE_URI = "sqlite:///db/data.db"
+    SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI", "sqlite:///db/data.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False

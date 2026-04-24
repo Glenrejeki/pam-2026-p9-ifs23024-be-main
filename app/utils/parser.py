@@ -4,13 +4,8 @@ import re
 def parse_llm_response(result):
     try:
         content = result.get("response") or result
-
-        # 🔥 hapus ```json ... ```
-        content = re.sub(r"```json\n|\n```", "", content)
-
+        content = re.sub(r"```json\n|\n```|```json|```", "", content).strip()
         parsed = json.loads(content)
-
-        return parsed.get("motivations", [])
-
+        return parsed
     except Exception as e:
         raise Exception(f"Invalid JSON from LLM: {str(e)}")

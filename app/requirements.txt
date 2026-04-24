@@ -1,0 +1,6 @@
+flask
+sqlalchemy
+python-dotenv
+requests
+flask-cors
+Pillow
