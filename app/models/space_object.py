@@ -16,3 +16,16 @@ class SpaceObject(Base):
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc),
                         onupdate=lambda: datetime.now(timezone.utc))
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "nama": self.nama,
+            "tipe": self.tipe,
+            "path_gambar": self.path_gambar,
+            "deskripsi": self.deskripsi,
+            "jarak_dari_bumi": self.jarak_dari_bumi,
+            "fakta": self.fakta,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_at.isoformat() if self.updated_at else None
+        }
