@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()  # ← harus SEBELUM import create_app
+
 from app import create_app
 import os
 
